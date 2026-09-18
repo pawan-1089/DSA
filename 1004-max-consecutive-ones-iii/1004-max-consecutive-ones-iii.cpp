@@ -11,13 +11,13 @@ public:
             if(nums[r]==0){
                 zeros++;
             }
-            while(zeros>k && l<n){
+            if(zeros>k){
                 if(nums[l]==0){
                     zeros--;
                 }
                 l=l+1;
             }
-            if(zeros<=k){
+            if(zeros<=k ){
                 maxlen=max(maxlen,r-l+1);
             }
             r++;
