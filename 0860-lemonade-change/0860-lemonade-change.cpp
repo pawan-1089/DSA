@@ -1,42 +1,27 @@
 class Solution {
 public:
     bool lemonadeChange(vector<int>& bills) {
-        unordered_map<int,int>mpp;
+        int five=0;
+        int ten=0;
         for(int i=0; i<bills.size(); i++){
             if(bills[i]==5){
-                mpp[5]++;
+                five++;
             }
             else if(bills[i]==10){
-                mpp[10]++;
-                if(mpp.find(5)==mpp.end()){
-                    return false;
-                }
-                else {
-                    mpp[5]--;
-                    if(mpp[5]==0){
-                        mpp.erase(5);
-                    }
-                }
+                ten++;
+                if(five<=0)return false;
+                else five--;
             }
             else if(bills[i]==20){
-                if(mpp.find(5)==mpp.end()){
-                    return false;
-                }
+                if(five<=0)return false;
                 else {
-                    mpp[5]--;
-                    if(mpp[5]==0){
-                        mpp.erase(5);
-                    }
-                    if(mpp.find(10)!=mpp.end()){
-                        mpp[10]--;
-                        if(mpp[10]==0)mpp.erase(10);
+                    if(ten>0){
+                        ten--;
+                        five--;
                     }
                     else {
-                        if(mpp[5]>=2){
-                            mpp[5]=mpp[5]-2;
-                            if(mpp[5]==0){
-                            mpp.erase(5);
-                            }
+                        if(five>=3){
+                            five=five-3;
                         }
                         else return false;
                     }
